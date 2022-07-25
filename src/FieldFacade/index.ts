@@ -1,5 +1,5 @@
 import { injectable, inject } from 'inversify';
-import { appContainer, DITypes, Keys, snakeSpeed } from '../constants';
+import { appContainer, DITypes, Keys } from '../constants';
 import type { FoodModel } from '../Food/types';
 import Segment, { DirType } from '../Segment';
 import type { SnakeModel } from '../Snake/types';
@@ -76,7 +76,7 @@ export default class FieldFacade implements FieldFacadeModel {
     }, 1000);
   }
 
-  public updateDir(event: KeyboardEvent): void {
+  public updateDir = (event: KeyboardEvent): void => {
     if (event.key === Keys.LEFT) {
       this.dir = 'left';
     }
