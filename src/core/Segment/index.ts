@@ -1,13 +1,33 @@
+/* eslint-disable no-underscore-dangle */
 export default class Segment {
 
-  private x!: number;
-  private y!: number;
+  // eslint-disable-next-line no-useless-constructor
+  constructor(
+    private _x: number,
+    private _y: number,
+    private _width: number,
+    private _height: number,
+  ) {}
 
-  move(x: number, y: number): [number, number] {
-    this.x = x;
-    this.y = y;
+  get x(): number {
+    return this._x;
+  }
 
-    return [x, y];
+  get y(): number {
+    return this._y;
+  }
+
+  get width(): number {
+    return this._width;
+  }
+
+  get height(): number {
+    return this._height;
+  }
+
+  move(x: number, y: number): void {
+    this._x = x;
+    this._y = y;
   }
 
 }
