@@ -20,6 +20,18 @@ export default class Snake {
     return this.segments.map(({ x, y }) => [x, y]);
   }
 
+  findIntersection(): number[] {
+    const lastSegment = last(this.segments);
+    const intersectedSegment = this.segments
+      .find(({ x, y }) => lastSegment.x === x && lastSegment.y === y);
+
+    if (!intersectedSegment) {
+      return [];
+    }
+
+    return [intersectedSegment.x, intersectedSegment.y];
+  }
+
   moveSegment(segment: Segment): void {
     const moveFns: Directions = {
       up: (): void => {

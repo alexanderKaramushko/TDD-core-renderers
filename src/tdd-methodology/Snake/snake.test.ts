@@ -152,4 +152,27 @@ describe('Snake', () => {
     expect(snake.getCoords()).toEqual([[0, 40], [-10, 40], [-10, 30], [0, 30]]);
   });
 
+  it('should find intersections', () => {
+    const segments = [
+      new Segment(0, 10, 10, 10),
+      new Segment(0, 20, 10, 10),
+      new Segment(0, 30, 10, 10),
+      new Segment(0, 40, 10, 10),
+      new Segment(0, 50, 10, 10),
+    ];
+
+    const snake = new Snake(segments);
+
+    snake.setDirection('left');
+    snake.move();
+
+    snake.setDirection('up');
+    snake.move();
+
+    snake.setDirection('right');
+    snake.move();
+
+    expect(snake.findIntersection()).toEqual([0, 40]);
+  });
+
 });
