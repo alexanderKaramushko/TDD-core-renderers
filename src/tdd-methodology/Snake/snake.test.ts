@@ -29,9 +29,7 @@ describe('Snake', () => {
     snake.setDirection('down');
     snake.move();
 
-    const coords = snake.segments.map(({ x, y }) => [x, y]);
-
-    expect(coords).toEqual([[0, 20], [0, 30], [0, 40], [0, 50]]);
+    expect(snake.getCoords()).toEqual([[0, 20], [0, 30], [0, 40], [0, 50]]);
   });
 
   it('should move segments right -> up', () => {
@@ -50,9 +48,7 @@ describe('Snake', () => {
     snake.setDirection('up');
     snake.move();
 
-    const coords = snake.segments.map(({ x, y }) => [x, y]);
-
-    expect(coords).toEqual([[0, 30], [0, 40], [10, 40], [10, 30]]);
+    expect(snake.getCoords()).toEqual([[0, 30], [0, 40], [10, 40], [10, 30]]);
   });
 
   it('should move segments right -> down', () => {
@@ -71,9 +67,7 @@ describe('Snake', () => {
     snake.setDirection('down');
     snake.move();
 
-    const coords = snake.segments.map(({ x, y }) => [x, y]);
-
-    expect(coords).toEqual([[0, 30], [0, 40], [10, 40], [10, 50]]);
+    expect(snake.getCoords()).toEqual([[0, 30], [0, 40], [10, 40], [10, 50]]);
   });
 
   it('should move segments left -> up', () => {
@@ -92,9 +86,7 @@ describe('Snake', () => {
     snake.setDirection('up');
     snake.move();
 
-    const coords = snake.segments.map(({ x, y }) => [x, y]);
-
-    expect(coords).toEqual([[0, 30], [0, 40], [-10, 40], [-10, 30]]);
+    expect(snake.getCoords()).toEqual([[0, 30], [0, 40], [-10, 40], [-10, 30]]);
   });
 
   it('should move segments left -> down', () => {
@@ -113,9 +105,7 @@ describe('Snake', () => {
     snake.setDirection('down');
     snake.move();
 
-    const coords = snake.segments.map(({ x, y }) => [x, y]);
-
-    expect(coords).toEqual([[0, 30], [0, 40], [-10, 40], [-10, 50]]);
+    expect(snake.getCoords()).toEqual([[0, 30], [0, 40], [-10, 40], [-10, 50]]);
   });
 
   it('should move segments up -> left', () => {
@@ -137,9 +127,7 @@ describe('Snake', () => {
     snake.setDirection('left');
     snake.move();
 
-    const coords = snake.segments.map(({ x, y }) => [x, y]);
-
-    expect(coords).toEqual([[0, 40], [-10, 40], [-10, 30], [-20, 30]]);
+    expect(snake.getCoords()).toEqual([[0, 40], [-10, 40], [-10, 30], [-20, 30]]);
   });
 
   it('should move segments up -> right', () => {
@@ -161,9 +149,7 @@ describe('Snake', () => {
     snake.setDirection('right');
     snake.move();
 
-    const coords = snake.segments.map(({ x, y }) => [x, y]);
-
-    expect(coords).toEqual([[0, 40], [-10, 40], [-10, 30], [0, 30]]);
+    expect(snake.getCoords()).toEqual([[0, 40], [-10, 40], [-10, 30], [0, 30]]);
   });
 
 });
