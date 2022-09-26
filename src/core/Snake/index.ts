@@ -10,14 +10,14 @@ export default class Snake {
   private direction!: Direction;
 
   // eslint-disable-next-line no-useless-constructor
-  constructor(private _segments: Segment[]) {}
-
-  get segments(): Segment[] {
-    return this._segments;
-  }
+  constructor(private segments: Segment[]) {}
 
   setDirection(direction: Direction): void {
     this.direction = direction;
+  }
+
+  getCoords(): number[][] {
+    return this.segments.map(({ x, y }) => [x, y]);
   }
 
   moveSegment(segment: Segment): void {
@@ -56,12 +56,12 @@ export default class Snake {
   }
 
   moveByDirection(segment: Segment): void {
-    const lastSegment = last(this._segments);
+    const lastSegment = last(this.segments);
 
     if (segment === lastSegment) {
       this.moveSegment(segment);
     } else {
-      const nextSegment = getTargetByIndex(this._segments, segment, getNextIndexFromTarget);
+      const nextSegment = getTargetByIndex(this.segments, segment, getNextIndexFromTarget);
 
       if (!nextSegment) {
         return;
