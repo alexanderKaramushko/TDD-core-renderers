@@ -3,9 +3,9 @@
 /* eslint-disable no-underscore-dangle */
 import { SegmentModel } from '../Segment/types';
 import { getNextIndexFromTarget, getTargetByIndex, last } from '../utils';
-import { Directions, Direction } from './types';
+import { Directions, Direction, SnakeModel } from './types';
 
-export default class Snake {
+export default class Snake implements SnakeModel {
 
   private direction!: Direction;
 
@@ -16,23 +16,23 @@ export default class Snake {
     this.direction = direction;
   }
 
-  getCoords(): number[][] {
+  getCoords(): [number, number][] {
     return this.segments.map(({ x, y }) => [x, y]);
   }
 
-  findIntersection(): number[] {
+  findIntersection(): [number, number] | null {
     const lastSegment = last(this.segments);
     const intersectedSegment = this.segments
       .find(({ x, y }) => lastSegment.x === x && lastSegment.y === y);
 
     if (!intersectedSegment) {
-      return [];
+      return null;
     }
 
     return [intersectedSegment.x, intersectedSegment.y];
   }
 
-  moveSegment(segment: SegmentModel): void {
+  private moveSegment(segment: SegmentModel): void {
     const moveFns: Directions = {
       up: (): void => {
         segment.move(
@@ -67,7 +67,7 @@ export default class Snake {
     }
   }
 
-  moveByDirection(segment: SegmentModel): void {
+  private moveByDirection(segment: SegmentModel): void {
     const lastSegment = last(this.segments);
 
     if (segment === lastSegment) {

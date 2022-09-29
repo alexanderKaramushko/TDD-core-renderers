@@ -3,19 +3,6 @@ import Segment from '../Segment';
 
 /* eslint-disable no-undef */
 describe('Snake', () => {
-  it('should create segments', () => {
-    const segments = [
-      new Segment(0, 0, 10, 10),
-      new Segment(0, 0, 10, 10),
-      new Segment(0, 0, 10, 10),
-      new Segment(0, 0, 10, 10),
-    ];
-
-    const snake = new Snake(segments);
-
-    expect(snake).toEqual(new Snake(segments));
-  });
-
   it('should move segments down', () => {
     const segments = [
       new Segment(0, 10, 10, 10),
