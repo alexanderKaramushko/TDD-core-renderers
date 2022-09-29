@@ -1,7 +1,7 @@
 /* eslint-disable sort-keys */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
-import Segment from '../Segment';
+import { SegmentModel } from '../Segment/types';
 import { getNextIndexFromTarget, getTargetByIndex, last } from '../utils';
 import { Directions, Direction } from './types';
 
@@ -10,7 +10,7 @@ export default class Snake {
   private direction!: Direction;
 
   // eslint-disable-next-line no-useless-constructor
-  constructor(private segments: Segment[]) {}
+  constructor(private segments: SegmentModel[]) {}
 
   setDirection(direction: Direction): void {
     this.direction = direction;
@@ -32,7 +32,7 @@ export default class Snake {
     return [intersectedSegment.x, intersectedSegment.y];
   }
 
-  moveSegment(segment: Segment): void {
+  moveSegment(segment: SegmentModel): void {
     const moveFns: Directions = {
       up: (): void => {
         segment.move(
@@ -67,7 +67,7 @@ export default class Snake {
     }
   }
 
-  moveByDirection(segment: Segment): void {
+  moveByDirection(segment: SegmentModel): void {
     const lastSegment = last(this.segments);
 
     if (segment === lastSegment) {

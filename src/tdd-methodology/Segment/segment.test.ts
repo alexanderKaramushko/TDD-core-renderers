@@ -11,6 +11,7 @@ describe('Segment', () => {
   it('should move segment', () => {
     segment.move(5, 5);
 
+    // todo don`t reveal instance properties
     expect(segment.x).toEqual(5);
     expect(segment.y).toEqual(5);
   });

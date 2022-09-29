@@ -1,5 +1,7 @@
+import { SegmentModel } from './types';
+
 /* eslint-disable no-underscore-dangle */
-export default class Segment {
+export default class Segment implements SegmentModel {
 
   // eslint-disable-next-line no-useless-constructor
   constructor(
