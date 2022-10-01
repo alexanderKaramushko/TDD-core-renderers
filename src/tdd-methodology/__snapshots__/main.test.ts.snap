@@ -27,3 +27,59 @@ exports[`main should move segment 1`] = `
   </div>
 </div>
 `;
+
+exports[`main should take app snapshot to detect undesirable changes 1`] = `
+<div
+  id="app"
+>
+  <div
+    id="field"
+    style="left: 0px; top: 0px; width: 200px; height: 200px;"
+  >
+    <div
+      class="segment"
+      style="left: 0px; top: 10px;"
+    />
+    <div
+      class="segment"
+      style="left: 0px; top: 20px;"
+    />
+    <div
+      class="segment"
+      style="left: 0px; top: 30px;"
+    />
+    <div
+      class="segment"
+      style="left: 0px; top: 40px;"
+    />
+  </div>
+</div>
+`;
+
+exports[`main should take snapshot to detect undesirable changes 1`] = `
+<div
+  id="app"
+>
+  <div
+    id="field"
+    style="left: 0px; top: 0px; width: 200px; height: 200px;"
+  >
+    <div
+      class="segment"
+      style="left: 0px; top: 10px;"
+    />
+    <div
+      class="segment"
+      style="left: 0px; top: 20px;"
+    />
+    <div
+      class="segment"
+      style="left: 0px; top: 30px;"
+    />
+    <div
+      class="segment"
+      style="left: 0px; top: 40px;"
+    />
+  </div>
+</div>
+`;
