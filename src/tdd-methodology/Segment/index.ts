@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { SegmentModel } from './types';
 
 /* eslint-disable no-underscore-dangle */

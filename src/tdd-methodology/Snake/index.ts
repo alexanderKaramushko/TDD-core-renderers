@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable sort-keys */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`main should move segment 1`] = `
+<div
+  id="app"
+>
+  <div
+    id="field"
+    style="left: 0px; top: 0px; width: 200px; height: 200px;"
+  >
+    <div
+      class="segment"
+      style="left: 0px; top: 10px;"
+    />
+    <div
+      class="segment"
+      style="left: 0px; top: 20px;"
+    />
+    <div
+      class="segment"
+      style="left: 0px; top: 30px;"
+    />
+    <div
+      class="segment"
+      style="left: 0px; top: 40px;"
+    />
+  </div>
+</div>
+`;

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { SnakeModel } from '../Snake/types';
 import { last } from '../utils';
 import { FieldModel } from './types';
@@ -21,6 +22,10 @@ export default class Field implements FieldModel {
     }
 
     return null;
+  }
+
+  getCoords(): number[][] {
+    return [[this.x1, this.y1], [this.x2, this.y2]];
   }
 
 }
