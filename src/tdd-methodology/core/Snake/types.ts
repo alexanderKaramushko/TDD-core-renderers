@@ -5,12 +5,15 @@ export type YDirections = 'up' | 'down';
 export type Direction = XDirections | YDirections;
 
 export type Directions = {
+  // eslint-disable-next-line no-unused-vars
   [K in Direction]?: () => void
 }
 
 export type SnakeModel = {
-  setDirection(direction: Direction): void;
   getCoords(): [number, number][];
   findIntersection(): [number, number] | null;
-  move(): void;
+  moveDown(): void;
+  moveUp(): void;
+  moveRight(): void;
+  moveLeft(): void;
 }

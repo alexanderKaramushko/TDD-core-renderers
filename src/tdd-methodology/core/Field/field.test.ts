@@ -21,8 +21,7 @@ describe('Field', () => {
   it('should detect field border x-intersection', () => {
     const field = new Field(0, 0, 50, 50);
 
-    snake.setDirection('left');
-    snake.move();
+    snake.moveLeft();
 
     expect(field.findIntersection(snake)).toEqual([-10, 40]);
   });
@@ -30,9 +29,8 @@ describe('Field', () => {
   it('should detect field border y-intersection', () => {
     const field = new Field(0, 0, 50, 50);
 
-    snake.setDirection('down');
-    snake.move();
-    snake.move();
+    snake.moveDown();
+    snake.moveDown();
 
     expect(field.findIntersection(snake)).toEqual([0, 60]);
   });

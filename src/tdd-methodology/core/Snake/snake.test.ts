@@ -1,165 +1,108 @@
 import Snake from '.';
 import Segment from '../Segment';
+import { SnakeModel } from './types';
+
+let snake: SnakeModel = {} as SnakeModel;
+let segments: Segment[] = [];
 
 /* eslint-disable no-undef */
 describe('Snake', () => {
-  it('should move segments down', () => {
-    const segments = [
+  beforeEach(() => {
+    segments = [
       new Segment(0, 10, 10, 10),
       new Segment(0, 20, 10, 10),
       new Segment(0, 30, 10, 10),
       new Segment(0, 40, 10, 10),
     ];
 
-    const snake = new Snake(segments);
+    snake = new Snake(segments);
+  });
 
-    snake.setDirection('down');
-    snake.move();
+  it('should move segments down', () => {
+    snake.moveDown();
 
     expect(snake.getCoords()).toEqual([[0, 20], [0, 30], [0, 40], [0, 50]]);
   });
 
   it('should move segments right -> up', () => {
-    const segments = [
-      new Segment(0, 10, 10, 10),
-      new Segment(0, 20, 10, 10),
-      new Segment(0, 30, 10, 10),
-      new Segment(0, 40, 10, 10),
-    ];
-
-    const snake = new Snake(segments);
-
-    snake.setDirection('right');
-    snake.move();
-
-    snake.setDirection('up');
-    snake.move();
+    snake.moveRight();
+    snake.moveUp();
 
     expect(snake.getCoords()).toEqual([[0, 30], [0, 40], [10, 40], [10, 30]]);
   });
 
   it('should move segments right -> down', () => {
-    const segments = [
-      new Segment(0, 10, 10, 10),
-      new Segment(0, 20, 10, 10),
-      new Segment(0, 30, 10, 10),
-      new Segment(0, 40, 10, 10),
-    ];
-
-    const snake = new Snake(segments);
-
-    snake.setDirection('right');
-    snake.move();
-
-    snake.setDirection('down');
-    snake.move();
+    snake.moveRight();
+    snake.moveDown();
 
     expect(snake.getCoords()).toEqual([[0, 30], [0, 40], [10, 40], [10, 50]]);
   });
 
   it('should move segments left -> up', () => {
-    const segments = [
-      new Segment(0, 10, 10, 10),
-      new Segment(0, 20, 10, 10),
-      new Segment(0, 30, 10, 10),
-      new Segment(0, 40, 10, 10),
-    ];
-
-    const snake = new Snake(segments);
-
-    snake.setDirection('left');
-    snake.move();
-
-    snake.setDirection('up');
-    snake.move();
+    snake.moveLeft();
+    snake.moveUp();
 
     expect(snake.getCoords()).toEqual([[0, 30], [0, 40], [-10, 40], [-10, 30]]);
   });
 
   it('should move segments left -> down', () => {
-    const segments = [
-      new Segment(0, 10, 10, 10),
-      new Segment(0, 20, 10, 10),
-      new Segment(0, 30, 10, 10),
-      new Segment(0, 40, 10, 10),
-    ];
-
-    const snake = new Snake(segments);
-
-    snake.setDirection('left');
-    snake.move();
-
-    snake.setDirection('down');
-    snake.move();
+    snake.moveLeft();
+    snake.moveDown();
 
     expect(snake.getCoords()).toEqual([[0, 30], [0, 40], [-10, 40], [-10, 50]]);
   });
 
   it('should move segments up -> left', () => {
-    const segments = [
-      new Segment(0, 10, 10, 10),
-      new Segment(0, 20, 10, 10),
-      new Segment(0, 30, 10, 10),
-      new Segment(0, 40, 10, 10),
-    ];
-
-    const snake = new Snake(segments);
-
-    snake.setDirection('left');
-    snake.move();
-
-    snake.setDirection('up');
-    snake.move();
-
-    snake.setDirection('left');
-    snake.move();
+    snake.moveLeft();
+    snake.moveUp();
+    snake.moveLeft();
 
     expect(snake.getCoords()).toEqual([[0, 40], [-10, 40], [-10, 30], [-20, 30]]);
   });
 
   it('should move segments up -> right', () => {
-    const segments = [
-      new Segment(0, 10, 10, 10),
-      new Segment(0, 20, 10, 10),
-      new Segment(0, 30, 10, 10),
-      new Segment(0, 40, 10, 10),
-    ];
-
-    const snake = new Snake(segments);
-
-    snake.setDirection('left');
-    snake.move();
-
-    snake.setDirection('up');
-    snake.move();
-
-    snake.setDirection('right');
-    snake.move();
+    snake.moveLeft();
+    snake.moveUp();
+    snake.moveRight();
 
     expect(snake.getCoords()).toEqual([[0, 40], [-10, 40], [-10, 30], [0, 30]]);
   });
 
   it('should find intersections', () => {
-    const segments = [
-      new Segment(0, 10, 10, 10),
-      new Segment(0, 20, 10, 10),
-      new Segment(0, 30, 10, 10),
-      new Segment(0, 40, 10, 10),
-      new Segment(0, 50, 10, 10),
-    ];
+    snake.moveLeft();
+    snake.moveUp();
+    snake.moveRight();
 
-    const snake = new Snake(segments);
+    expect(snake.findIntersection()).toEqual([0, 30]);
+  });
 
-    snake.setDirection('left');
-    snake.move();
+  it('shouldn`t move up when moving down', () => {
+    snake.moveDown();
+    snake.moveUp();
 
-    snake.setDirection('up');
-    snake.move();
+    expect(snake.getCoords()).toEqual([[0, 20], [0, 30], [0, 40], [0, 50]]);
+  });
 
-    snake.setDirection('right');
-    snake.move();
+  it('shouldn`t move down when moving up', () => {
+    snake.moveLeft();
+    snake.moveUp();
+    snake.moveDown();
 
-    expect(snake.findIntersection()).toEqual([0, 40]);
+    expect(snake.getCoords()).toEqual([[0, 30], [0, 40], [-10, 40], [-10, 30]]);
+  });
+
+  it('shouldn`t move right when moving left', () => {
+    snake.moveLeft();
+    snake.moveRight();
+
+    expect(snake.getCoords()).toEqual([[0, 20], [0, 30], [0, 40], [-10, 40]]);
+  });
+
+  it('shouldn`t move left when moving right', () => {
+    snake.moveRight();
+    snake.moveLeft();
+
+    expect(snake.getCoords()).toEqual([[0, 20], [0, 30], [0, 40], [10, 40]]);
   });
 
 });

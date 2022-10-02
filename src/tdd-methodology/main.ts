@@ -18,7 +18,14 @@ export default function main(): void {
   const snake = new Snake(segments);
   const field = new Field(0, 200, 0, 200);
 
+  // const snakeFacade = new SnakeFacade();
+
   const renderer = new NativeRenderer(snake, field);
+
+  // pass renderer to Snake
+  // snakeFacade.initSnake();
+  // snakeFacade.initRenderer(renderer);
+  // snakeFacade.startMove();
 
   getAppContainer()?.appendChild(renderer.render());
 }

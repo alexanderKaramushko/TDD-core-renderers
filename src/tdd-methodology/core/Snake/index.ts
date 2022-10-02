@@ -13,10 +13,6 @@ export default class Snake implements SnakeModel {
   // eslint-disable-next-line no-useless-constructor
   constructor(private segments: SegmentModel[]) {}
 
-  setDirection(direction: Direction): void {
-    this.direction = direction;
-  }
-
   getCoords(): [number, number][] {
     return this.segments.map(({ x, y }) => [x, y]);
   }
@@ -31,6 +27,10 @@ export default class Snake implements SnakeModel {
     }
 
     return [intersectedSegment.x, intersectedSegment.y];
+  }
+
+  private setDirection(direction: Direction): void {
+    this.direction = direction;
   }
 
   private moveSegment(segment: SegmentModel): void {
@@ -84,10 +84,46 @@ export default class Snake implements SnakeModel {
     }
   }
 
-  move(): void {
+  private move(): void {
     this.segments.forEach((segment) => {
       this.moveByDirection(segment);
     });
+  }
+
+  moveDown(): void {
+    if (this.direction === 'up') {
+      return;
+    }
+
+    this.setDirection('down');
+    this.move();
+  }
+
+  moveUp(): void {
+    if (this.direction === 'down') {
+      return;
+    }
+
+    this.setDirection('up');
+    this.move();
+  }
+
+  moveRight(): void {
+    if (this.direction === 'left') {
+      return;
+    }
+
+    this.setDirection('right');
+    this.move();
+  }
+
+  moveLeft(): void {
+    if (this.direction === 'right') {
+      return;
+    }
+
+    this.setDirection('left');
+    this.move();
   }
 
 }
