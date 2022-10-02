@@ -3,7 +3,7 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
 import { SegmentModel } from '../Segment/types';
-import { getNextIndexFromTarget, getTargetByIndex, last } from '../utils';
+import { getNextIndexFromTarget, getTargetByIndex, last } from '../../utils';
 import { Directions, Direction, SnakeModel } from './types';
 
 export default class Snake implements SnakeModel {

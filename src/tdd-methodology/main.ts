@@ -1,8 +1,8 @@
 import { getAppContainer } from './constants';
-import Field from './Field';
-import Renderer from './Renderer/Renderer';
-import Segment from './Segment';
-import Snake from './Snake';
+import Field from './core/Field';
+import NativeRenderer from './renderers/NativeRenderer';
+import Segment from './core/Segment';
+import Snake from './core/Snake';
 
 /**
  * @description entrypoint
@@ -18,7 +18,7 @@ export default function main(): void {
   const snake = new Snake(segments);
   const field = new Field(0, 200, 0, 200);
 
-  const renderer = new Renderer(snake, field);
+  const renderer = new NativeRenderer(snake, field);
 
   getAppContainer()?.appendChild(renderer.render());
 }

@@ -1,16 +1,9 @@
 /* eslint-disable no-unused-vars */
-import { FieldModel } from '../Field/types';
-import { SnakeModel } from '../Snake/types';
+import AbstractRenderer from '../../core/Renderer';
 
 import './style.scss';
 
-export default class Renderer {
-
-  // eslint-disable-next-line no-useless-constructor
-  constructor(
-    private snake: SnakeModel,
-    private field: FieldModel,
-  ) {}
+export default class NativeRenderer extends AbstractRenderer {
 
   buildField(): HTMLDivElement {
     const field = document.createElement('div');
@@ -46,13 +39,12 @@ export default class Renderer {
     return snakeFragment;
   }
 
-  render(): HTMLDivElement {
-    const field = this.buildField();
-    const snake = this.buildSnake();
-
+  /**
+   * @override
+   */
+  // eslint-disable-next-line class-methods-use-this
+  afterBuildHook(field: Element, snake: DocumentFragment): void {
     field.appendChild(snake);
-
-    return field;
   }
 
 }

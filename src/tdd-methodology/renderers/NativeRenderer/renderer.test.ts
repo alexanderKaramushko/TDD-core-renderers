@@ -1,16 +1,16 @@
-import Field from '../Field';
-import { FieldModel } from '../Field/types';
-import Segment from '../Segment';
-import Snake from '../Snake';
-import { SnakeModel } from '../Snake/types';
-import Renderer from './Renderer';
+import Field from '../../core/Field';
+import { FieldModel } from '../../core/Field/types';
+import Segment from '../../core/Segment';
+import Snake from '../../core/Snake';
+import { SnakeModel } from '../../core/Snake/types';
+import NativeRenderer from '.';
 
 let snake: SnakeModel = {} as SnakeModel;
 let field: FieldModel = {} as FieldModel;
 let segments: Segment[] = [];
 
 /* eslint-disable no-undef */
-describe('Renderer', () => {
+describe('NativeRenderer', () => {
   beforeEach(() => {
     segments = [
       new Segment(0, 10, 10, 10),
@@ -24,7 +24,7 @@ describe('Renderer', () => {
   });
 
   it('should render field', () => {
-    const renderer = new Renderer(snake, field);
+    const renderer = new NativeRenderer(snake, field);
 
     const fieldElement = renderer.buildField();
 
@@ -32,7 +32,7 @@ describe('Renderer', () => {
   });
 
   it('should render snake', () => {
-    const renderer = new Renderer(snake, field);
+    const renderer = new NativeRenderer(snake, field);
 
     const snakeElement = renderer.buildSnake();
 
@@ -42,7 +42,7 @@ describe('Renderer', () => {
   it('should render game', () => {
     document.body.innerHTML = '<div id="app"></div>';
 
-    const renderer = new Renderer(snake, field);
+    const renderer = new NativeRenderer(snake, field);
 
     const game = renderer.render();
 
