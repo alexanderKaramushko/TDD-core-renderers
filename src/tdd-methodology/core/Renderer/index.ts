@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable @typescript-eslint/no-empty-function */
@@ -8,26 +9,20 @@ import { SnakeModel } from '../Snake/types';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export default abstract class AbstractRenderer {
 
-  // eslint-disable-next-line no-useless-constructor
-  constructor(
-      protected snake: SnakeModel,
-      protected field: FieldModel,
-  ) {}
+  abstract buildField(field: FieldModel): Element;
 
-  abstract buildField(): Element;
-
-  abstract buildSnake(): DocumentFragment;
+  abstract buildSnake(snake: SnakeModel): DocumentFragment;
 
   /**
    * template method
    */
-  render(): Element {
-    const field = this.buildField();
-    const snake = this.buildSnake();
+  render(field: FieldModel, snake: SnakeModel): Element {
+    const _field = this.buildField(field);
+    const _snake = this.buildSnake(snake);
 
-    this.afterBuildHook(field, snake);
+    this.afterBuildHook(_field, _snake);
 
-    return field;
+    return _field;
   }
 
   afterBuildHook(field: Element, snake: DocumentFragment): void {}

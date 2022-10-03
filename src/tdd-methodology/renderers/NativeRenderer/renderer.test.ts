@@ -24,17 +24,17 @@ describe('NativeRenderer', () => {
   });
 
   it('should render field', () => {
-    const renderer = new NativeRenderer(snake, field);
+    const renderer = new NativeRenderer();
 
-    const fieldElement = renderer.buildField();
+    const fieldElement = renderer.buildField(field);
 
     expect(fieldElement).toBeInstanceOf(HTMLDivElement);
   });
 
   it('should render snake', () => {
-    const renderer = new NativeRenderer(snake, field);
+    const renderer = new NativeRenderer();
 
-    const snakeElement = renderer.buildSnake();
+    const snakeElement = renderer.buildSnake(snake);
 
     expect(snakeElement).toBeInstanceOf(DocumentFragment);
   });
@@ -42,9 +42,9 @@ describe('NativeRenderer', () => {
   it('should render game', () => {
     document.body.innerHTML = '<div id="app"></div>';
 
-    const renderer = new NativeRenderer(snake, field);
+    const renderer = new NativeRenderer();
 
-    const game = renderer.render();
+    const game = renderer.render(field, snake);
 
     expect(game).toBeInstanceOf(HTMLDivElement);
     expect(game.querySelectorAll('.segment')).toHaveLength(segments.length);
