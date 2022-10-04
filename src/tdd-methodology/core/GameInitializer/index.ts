@@ -3,15 +3,39 @@ import Field from '../Field';
 import Snake from '../Snake';
 import { GameInitializerModel } from './types';
 import Segment from '../Segment';
-import { getAppContainer } from '../../constants';
+import { SnakeModel } from '../Snake/types';
+import { FieldModel } from '../Field/types';
 
 export default class GameInitializer implements GameInitializerModel {
+
+  private snake!: SnakeModel;
+  private field!: FieldModel;
 
   // eslint-disable-next-line no-useless-constructor
   constructor(
     // eslint-disable-next-line no-unused-vars
     private renderer: AbstractRenderer,
   ) {}
+
+  moveLeft(): void {
+    this.snake.moveLeft();
+    this.renderer.render(this.field, this.snake);
+  }
+
+  moveRight(): void {
+    this.snake.moveRight();
+    this.renderer.render(this.field, this.snake);
+  }
+
+  moveUp(): void {
+    this.snake.moveUp();
+    this.renderer.render(this.field, this.snake);
+  }
+
+  moveDown(): void {
+    this.snake.moveDown();
+    this.renderer.render(this.field, this.snake);
+  }
 
   createGame(): void {
     const segments = [
@@ -21,10 +45,10 @@ export default class GameInitializer implements GameInitializerModel {
       new Segment(0, 40, 10, 10),
     ];
 
-    const snake = new Snake(segments);
-    const field = new Field(0, 200, 0, 200);
+    this.snake = new Snake(segments);
+    this.field = new Field(0, 200, 0, 200);
 
-    getAppContainer()?.appendChild(this.renderer.render(field, snake));
+    this.renderer.render(this.field, this.snake);
   }
 
 }

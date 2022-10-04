@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-unused-vars */
+import { getAppContainer } from '../../constants';
 import { FieldModel } from '../../core/Field/types';
 import AbstractRenderer from '../../core/Renderer';
 import { SnakeModel } from '../../core/Snake/types';
@@ -49,6 +50,7 @@ export default class NativeRenderer extends AbstractRenderer {
   // eslint-disable-next-line class-methods-use-this
   afterBuildHook(field: Element, snake: DocumentFragment): void {
     field.appendChild(snake);
+    getAppContainer()?.append(field);
   }
 
 }
