@@ -1,29 +1,32 @@
 import { Keys } from './constants';
-import { GameInitializerModel } from './core/GameInitializer/types';
+import GameInitializer from './core/GameInitializer';
+import { RendererFactoryModel } from './core/RendererFactory/types';
 
 /**
  * @description entrypoint
  */
-export default function main(gameInitializer: GameInitializerModel): void {
-  gameInitializer.createGame();
+export default function main(renderer: RendererFactoryModel): void {
+  const game = new GameInitializer(renderer.createRenderer());
+
+  game.createGame();
 
   let direction: Keys = Keys.DOWN;
 
   setInterval(() => {
     if (direction === Keys.LEFT) {
-      gameInitializer.moveLeft();
+      game.moveLeft();
     }
 
     if (direction === Keys.UP) {
-      gameInitializer.moveUp();
+      game.moveUp();
     }
 
     if (direction === Keys.RIGHT) {
-      gameInitializer.moveRight();
+      game.moveRight();
     }
 
     if (direction === Keys.DOWN) {
-      gameInitializer.moveDown();
+      game.moveDown();
     }
   }, 1000);
 

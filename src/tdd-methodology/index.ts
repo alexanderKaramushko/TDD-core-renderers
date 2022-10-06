@@ -1,8 +1,4 @@
-import GameInitializer from './core/GameInitializer';
 import main from './main';
-import NativeRenderer from './renderers/NativeRenderer';
+import Renderer from './renderers/NativeRenderer/Renderer';
 
-// todo use fabric method Renderer.nativeRenderer()
-// to prevent straight reference to core
-// GameInitializer is an entry point to core
-main(new GameInitializer(new NativeRenderer()));
+main(new Renderer());
