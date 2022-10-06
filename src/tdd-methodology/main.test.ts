@@ -1,14 +1,19 @@
 import { getAppContainer } from './constants';
 import main from './main';
-import Renderer from './renderers/NativeRenderer/Renderer';
+import NativeRenderer from './renderers/NativeRenderer/Renderer';
+
+const renderers = [NativeRenderer];
 
 /* eslint-disable no-undef */
 describe('main', () => {
-  it('should take app snapshot to detect undesirable changes', () => {
-    document.body.innerHTML = '<div id="app"></div>';
+  test.each(renderers)(
+    'should match snapshot for %p',
+    (Renderer) => {
+      document.body.innerHTML = '<div id="app"></div>';
 
-    main(new Renderer());
+      main(new Renderer());
 
-    expect(getAppContainer()).toMatchSnapshot();
-  });
+      expect(getAppContainer()).toMatchSnapshot();
+    },
+  );
 });
