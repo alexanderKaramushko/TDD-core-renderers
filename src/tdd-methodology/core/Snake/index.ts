@@ -90,6 +90,25 @@ export default class Snake implements SnakeModel {
     });
   }
 
+  addSegment(): void {
+    const firstSegment = this.segments[0];
+    const nextSegment = getTargetByIndex(this.segments, firstSegment, getNextIndexFromTarget);
+
+    if (nextSegment) {
+      const deltaX = firstSegment.x * 2 - nextSegment.x;
+      const deltaY = firstSegment.y * 2 - nextSegment.y;
+
+      this.segments = [
+        {
+          ...firstSegment,
+          x: deltaX,
+          y: deltaY,
+        },
+        ...this.segments,
+      ];
+    }
+  }
+
   moveDown(): void {
     if (this.direction === 'up') {
       return;

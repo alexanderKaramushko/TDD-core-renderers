@@ -1,12 +1,12 @@
 import { Keys } from './constants';
-import GameInitializer from './core/GameInitializer';
+import GameFacade from './core/GameFacade';
 import { RendererFactoryModel } from './core/RendererFactory/types';
 
 /**
  * @description entrypoint
  */
 export default function main(renderer: RendererFactoryModel): void {
-  const game = new GameInitializer(renderer.createRenderer());
+  const game = new GameFacade(renderer.createRenderer());
 
   game.createGame();
 

@@ -105,4 +105,12 @@ describe('Snake', () => {
     expect(snake.getCoords()).toEqual([[0, 20], [0, 30], [0, 40], [10, 40]]);
   });
 
+  it('should add new segment to end', () => {
+    snake.moveDown();
+
+    snake.addSegment();
+
+    expect(snake.getCoords()).toEqual([[0, 10], [0, 20], [0, 30], [0, 40], [0, 50]]);
+  });
+
 });

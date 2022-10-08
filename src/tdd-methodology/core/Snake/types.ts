@@ -16,4 +16,5 @@ export type SnakeModel = {
   moveUp(): void;
   moveRight(): void;
   moveLeft(): void;
+  addSegment(): void;
 }

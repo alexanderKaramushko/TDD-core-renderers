@@ -16,7 +16,7 @@ let food: FoodModel = {} as FoodModel;
 
 // renderer, field type, snake type, game type, segments count
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const renderers: Array<[RendererFactory, any, any, any, number, any]> = [
+const renderers: Array<[RendererFactory, any, any, any, any, number]> = [
   [new NativeRenderer(), HTMLDivElement, DocumentFragment, HTMLDivElement, HTMLDivElement, 4],
 ];
 
