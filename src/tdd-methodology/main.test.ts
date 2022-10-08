@@ -2,6 +2,8 @@ import { getAppContainer } from './constants';
 import main from './main';
 import NativeRenderer from './renderers/NativeRenderer/Renderer';
 
+jest.spyOn(Math, 'random').mockImplementation(() => 1);
+
 const renderers = [NativeRenderer];
 
 /* eslint-disable no-undef */

@@ -24,6 +24,10 @@ exports[`main should match snapshot for [Function Renderer] 1`] = `
       class="segment"
       style="left: 0px; top: 40px;"
     />
+    <div
+      class="food"
+      style="left: 200px; top: 200px; width: 10px; height: 10px;"
+    />
   </div>
 </div>
 `;
