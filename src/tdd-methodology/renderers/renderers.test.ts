@@ -1,19 +1,23 @@
 import Field from '../core/Field';
 import { FieldModel } from '../core/Field/types';
+import Food from '../core/Food';
+import { FoodModel } from '../core/Food/types';
 import RendererFactory from '../core/RendererFactory';
 import Segment from '../core/Segment';
+import { SegmentModel } from '../core/Segment/types';
 import Snake from '../core/Snake';
 import { SnakeModel } from '../core/Snake/types';
 import NativeRenderer from './NativeRenderer/Renderer';
 
 let snake: SnakeModel = {} as SnakeModel;
 let field: FieldModel = {} as FieldModel;
-let segments: Segment[] = [];
+let segments: SegmentModel[] = [];
+let food: FoodModel = {} as FoodModel;
 
 // renderer, field type, snake type, game type, segments count
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const renderers: Array<[RendererFactory, any, any, any, number]> = [
-  [new NativeRenderer(), HTMLDivElement, DocumentFragment, HTMLDivElement, 4],
+const renderers: Array<[RendererFactory, any, any, any, number, any]> = [
+  [new NativeRenderer(), HTMLDivElement, DocumentFragment, HTMLDivElement, HTMLDivElement, 4],
 ];
 
 /* eslint-disable no-undef */
@@ -28,45 +32,25 @@ describe('NativeRenderer', () => {
 
     snake = new Snake(segments);
     field = new Field(0, 0, 200, 200);
+    food = new Food(50, 50, 10, 10);
   });
 
   test.each(renderers)(
     'should render field through %p',
-    (renderer, fieldType) => {
+    (renderer, fieldType, snakeType, gameType, foodType, segmentsCount) => {
       const fieldElement = renderer.createRenderer().buildField(field);
+      const snakeElement = renderer.createRenderer().buildSnake(snake);
+      const foodElement = renderer.createRenderer().buildFood(food);
+
+      const game = renderer.createRenderer().render(field, snake, food);
 
       expect(fieldElement).toBeInstanceOf(fieldType);
-    },
-  );
-
-  test.each(renderers)(
-    'should render snake',
-    (renderer, fieldType, snakeType) => {
-      const fieldElement = renderer.createRenderer().buildSnake(snake);
-
-      expect(fieldElement).toBeInstanceOf(snakeType);
-    },
-  );
-
-  test.each(renderers)(
-    'should render game',
-    (renderer, fieldType, snakeType, gameType) => {
-      document.body.innerHTML = '<div id="app"></div>';
-
-      const game = renderer.createRenderer().render(field, snake);
+      expect(snakeElement).toBeInstanceOf(snakeType);
+      expect(foodElement).toBeInstanceOf(foodType);
 
       expect(game).toBeInstanceOf(gameType);
-    },
-  );
-
-  test.each(renderers)(
-    'should render segments',
-    (renderer, fieldType, snakeType, gameType, segmentsCount) => {
-      document.body.innerHTML = '<div id="app"></div>';
-
-      const game = renderer.createRenderer().render(field, snake);
-
       expect(game.querySelectorAll('.segment')).toHaveLength(segmentsCount);
+      expect(game.querySelector('.food')).toBeInstanceOf(foodType);
     },
   );
 });

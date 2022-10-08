@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 import { getAppContainer } from '../../constants';
 import { FieldModel } from '../../core/Field/types';
+import { FoodModel } from '../../core/Food/types';
 import AbstractRenderer from '../../core/Renderer';
 import { SnakeModel } from '../../core/Snake/types';
 
@@ -36,7 +37,7 @@ export default class NativeRenderer extends AbstractRenderer {
       segment.style.left = `${x}px`;
       segment.style.top = `${y}px`;
 
-      segment.className = 'segment';
+      segment.classList.add('segment');
 
       snakeFragment.appendChild(segment);
     });
@@ -44,12 +45,31 @@ export default class NativeRenderer extends AbstractRenderer {
     return snakeFragment;
   }
 
+  buildFood(food: FoodModel): Element {
+    const [x, y] = food.getCoords();
+    const [width, height] = food.getSize();
+
+    const _food = document.createElement('div');
+
+    _food.style.left = `${x}px`;
+    _food.style.top = `${y}px`;
+
+    _food.style.width = `${width}px`;
+    _food.style.height = `${height}px`;
+
+    _food.classList.add('food');
+
+    return _food;
+  }
+
   /**
    * @override
    */
   // eslint-disable-next-line class-methods-use-this
-  afterBuildHook(field: Element, snake: DocumentFragment): void {
+  afterBuildHook(field: Element, snake: DocumentFragment, food: Element): void {
     field.appendChild(snake);
+    field.appendChild(food);
+
     getAppContainer()?.append(field);
   }
 
