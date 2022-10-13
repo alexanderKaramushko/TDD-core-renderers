@@ -1,13 +1,17 @@
+import { getAppContainer } from '../constants';
 import Field from '../core/Field';
 import { FieldModel } from '../core/Field/types';
 import Food from '../core/Food';
 import { FoodModel } from '../core/Food/types';
+import GameFacade from '../core/GameFacade';
 import RendererFactory from '../core/RendererFactory';
 import Segment from '../core/Segment';
 import { SegmentModel } from '../core/Segment/types';
 import Snake from '../core/Snake';
 import { SnakeModel } from '../core/Snake/types';
 import NativeRenderer from './NativeRenderer/Renderer';
+
+jest.mock('../core/Food');
 
 let snake: SnakeModel = {} as SnakeModel;
 let field: FieldModel = {} as FieldModel;
@@ -51,6 +55,19 @@ describe('NativeRenderer', () => {
       expect(game).toBeInstanceOf(gameType);
       expect(game.querySelectorAll('.segment')).toHaveLength(segmentsCount);
       expect(game.querySelector('.food')).toBeInstanceOf(foodType);
+    },
+  );
+
+  test.each(renderers)(
+    'should create snapshot for %p',
+    (renderer) => {
+      document.body.innerHTML = '<div id="app"></div>';
+
+      const game = new GameFacade(renderer.createRenderer());
+
+      game.createGame();
+
+      expect(getAppContainer()).toMatchSnapshot();
     },
   );
 });

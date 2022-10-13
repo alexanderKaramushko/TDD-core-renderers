@@ -28,7 +28,7 @@ export default function main(renderer: RendererFactoryModel): void {
     if (direction === Keys.DOWN) {
       game.moveDown();
     }
-  }, 1000);
+  }, 1000000);
 
   window.addEventListener('keypress', (event: KeyboardEvent) => {
     direction = event.key as Keys;

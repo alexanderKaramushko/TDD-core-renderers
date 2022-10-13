@@ -2,7 +2,7 @@
 /* eslint-disable sort-keys */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-underscore-dangle */
-import { SegmentModel } from '../Segment/types';
+import { SegmentConstructor, SegmentModel } from '../Segment/types';
 import { getNextIndexFromTarget, getTargetByIndex, last } from '../../utils';
 import { Directions, Direction, SnakeModel } from './types';
 
@@ -99,11 +99,12 @@ export default class Snake implements SnakeModel {
       const deltaY = firstSegment.y * 2 - nextSegment.y;
 
       this.segments = [
-        {
-          ...firstSegment,
-          x: deltaX,
-          y: deltaY,
-        },
+        new (nextSegment.constructor as SegmentConstructor)(
+          deltaX,
+          deltaY,
+          nextSegment.width,
+          nextSegment.height,
+        ),
         ...this.segments,
       ];
     }
