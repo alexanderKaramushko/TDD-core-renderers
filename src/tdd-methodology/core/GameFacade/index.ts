@@ -4,10 +4,11 @@ import Snake from '../Snake';
 import { GameFacadeModel } from './types';
 import Segment from '../Segment';
 import { SnakeModel } from '../Snake/types';
-import { FieldModel } from '../Field/types';
+import { FieldConstructorParameters, FieldModel } from '../Field/types';
 import { FoodModel } from '../Food/types';
 import Food from '../Food';
-import { last } from '../../utils';
+import { first, last } from '../../utils';
+import { SegmentConstructorParameters } from '../Segment/types';
 
 /**
  * @description entry point to core
@@ -17,6 +18,9 @@ export default class GameFacade implements GameFacadeModel {
   private snake!: SnakeModel;
   private field!: FieldModel;
   private food!: FoodModel;
+
+  private segmentWidth!: number;
+  private segmentHeight!: number;
 
   // eslint-disable-next-line no-useless-constructor
   constructor(
@@ -67,23 +71,40 @@ export default class GameFacade implements GameFacadeModel {
     const x = Math.round(Math.random() * x2);
     const y = Math.round(Math.random() * y2);
 
-    // todo hardcoded
-    return new Food(10 - (x % 10) + x, 10 - (y % 10) + y, 10, 10);
+    const { segmentWidth, segmentHeight } = this;
+
+    return new Food(
+      segmentWidth - (x % segmentWidth) + x,
+      segmentHeight - (y % segmentHeight) + y,
+      segmentWidth,
+      segmentHeight,
+    );
   }
 
-  createGame(): void {
-    // todo hardcoded
-    const segments = [
-      new Segment(0, 10, 10, 10),
-      new Segment(0, 20, 10, 10),
-      new Segment(0, 30, 10, 10),
-      new Segment(0, 40, 10, 10),
-    ];
+  createGame(
+    segmentsParameters: SegmentConstructorParameters[],
+    fieldParameters: FieldConstructorParameters,
+  ): void {
+    if (!segmentsParameters.length) {
+      throw new Error('No segments parameters!');
+    }
+
+    if (!fieldParameters.length) {
+      throw new Error('No field parameters!');
+    }
+
+    const segments = segmentsParameters.map((segmentParameters) => (
+      new Segment(...segmentParameters)
+    ));
 
     this.snake = new Snake(segments);
 
-    // todo hardcoded
-    this.field = new Field(0, 200, 0, 200);
+    this.field = new Field(...fieldParameters);
+
+    const [,, segmentWidth, segmentHeight] = first(segmentsParameters);
+
+    this.segmentWidth = segmentWidth;
+    this.segmentHeight = segmentHeight;
 
     this.food = this.spawnFood();
 

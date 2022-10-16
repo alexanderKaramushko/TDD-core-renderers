@@ -27,3 +27,7 @@ export function getTargetByIndex<T>(
 export function last<T>(array: T[]): T {
   return array[array.length - 1];
 }
+
+export function first<T>(array: T[]): T {
+  return array[0];
+}

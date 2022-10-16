@@ -65,7 +65,15 @@ describe('NativeRenderer', () => {
 
       const game = new GameFacade(renderer.createRenderer());
 
-      game.createGame();
+      game.createGame(
+        [
+          [0, 10, 10, 10],
+          [0, 20, 10, 10],
+          [0, 30, 10, 10],
+          [0, 40, 10, 10],
+        ],
+        [0, 200, 0, 200],
+      );
 
       expect(getAppContainer()).toMatchSnapshot();
     },

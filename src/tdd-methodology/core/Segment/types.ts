@@ -8,5 +8,7 @@ export type SegmentModel = {
 }
 
 export type SegmentConstructor = {
-  new(x: number, y: number, width: number, height: number): SegmentModel;
+  new(_x: number, _y: number, _width: number, _height: number): SegmentModel;
 }
+
+export type SegmentConstructorParameters = ConstructorParameters<SegmentConstructor>;

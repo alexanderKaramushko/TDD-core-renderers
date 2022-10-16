@@ -20,7 +20,15 @@ describe('GameFacade', () => {
 
   beforeEach(() => {
     gameFacade = new GameFacade(new Renderer());
-    gameFacade.createGame();
+    gameFacade.createGame(
+      [
+        [0, 10, 10, 10],
+        [0, 20, 10, 10],
+        [0, 30, 10, 10],
+        [0, 40, 10, 10],
+      ],
+      [0, 200, 0, 200],
+    );
   });
 
   it('should detect intersection with food', () => {
