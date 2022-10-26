@@ -1,15 +1,19 @@
-export function getPreviousIndexFromTarget<T>(array: T[], target: T): number {
-  return array.indexOf(target) - 1;
-}
+/* eslint-disable no-unused-vars */
+/* eslint-disable arrow-body-style */
+type GetIndexFromStrategy = <T>(array: T[], target: T) => number;
 
-export function getNextIndexFromTarget<T>(array: T[], target: T): number {
+export const getPreviousIndexFromTarget: GetIndexFromStrategy = <T>(array: T[], target: T): number => {
+  return array.indexOf(target) - 1;
+};
+
+export const getNextIndexFromTarget: GetIndexFromStrategy = <T>(array: T[], target: T): number => {
   return array.indexOf(target) + 1;
-}
+};
 
 export function getTargetByIndex<T>(
   array: T[],
   target: T,
-  getIndexFrom: (array: T[], target: T) => number,
+  getIndexFrom: GetIndexFromStrategy,
 ): T | undefined {
   if (!target) {
     return undefined;
